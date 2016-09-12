@@ -11,4 +11,4 @@ machine:
 test:
   override:
     - ./repos.sh
-    - npm start
+    - RAVEN_CLIENT_URL=$RAVEN_CLIENT_URL npm start
