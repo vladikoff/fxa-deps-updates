@@ -1,10 +1,18 @@
 'use strict';
 
 const fs = require('fs');
+const raven = require('raven');
 const path = require('path');
 const spawn = require('child_process').spawn;
 
 const PROJECT_PATH = path.resolve(path.join(__dirname, 'projects'));
+const RAVEN_CLIENT_URL = process.env.RAVEN_CLIENT_URL;
+
+let client = null;
+
+if (RAVEN_CLIENT_URL) {
+  client = new raven.Client(RAVEN_CLIENT_URL);
+}
 
 function getProjects(srcpath) {
   return fs.readdirSync(srcpath).filter(function(file) {
@@ -19,11 +27,27 @@ dirs.forEach(function (dir) {
     cwd: projectDir
   });
 
-  nsp.stdout.on('data', (data) => {
-    console.log(`stdout: ${data}`);
-  });
+  let nspOutput = '';
 
   nsp.stderr.on('data', (data) => {
-    console.log(`stderr: ${data}`);
+    nspOutput += data;
+  });
+
+  nsp.stderr.on('close', () => {
+    try {
+      let nspJson = JSON.parse(nspOutput);
+
+      nspJson.forEach(function (report) {
+        let nspMessage = dir + ' ' + report.module + ' ' + report.version;
+        let nspTags = {tags: report};
+
+        if (RAVEN_CLIENT_URL) {
+          client.captureMessage(nspMessage, nspTags)
+        } else {
+          console.log(nspMessage, nspTags);
+        }
+      });
+    } catch (e) {
+    }
   });
 });
