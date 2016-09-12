@@ -1,0 +1,24 @@
+{
+  "name": "fxa-deps-updates",
+  "version": "1.0.0",
+  "description": "FxA deps checker",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vladikoff/fxa-deps-updates.git"
+  },
+  "author": "",
+  "license": "MPL-2.0",
+  "bugs": {
+    "url": "https://github.com/vladikoff/fxa-deps-updates/issues"
+  },
+  "homepage": "https://github.com/vladikoff/fxa-deps-updates#readme",
+  "dependencies": {
+    "npm-check-updates": "2.8.0",
+    "nsp": "2.6.1",
+    "raven": "0.12.1"
+  }
+}
