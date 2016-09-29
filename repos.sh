@@ -12,6 +12,7 @@ git clone https://github.com/mozilla/fxa-oauth-server.git &
 git clone https://github.com/mozilla/fxa-oauth-console.git &
 git clone https://github.com/mozilla/fxa-profile-server.git &
 git clone https://github.com/mozilla/fxa-basket-proxy.git &
+git clone https://github.com/mozilla/fxa-geodb.git &
 
 wait
 
