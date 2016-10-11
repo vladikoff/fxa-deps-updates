@@ -14,6 +14,7 @@ git clone https://github.com/mozilla/fxa-profile-server.git &
 git clone https://github.com/mozilla/fxa-basket-proxy.git &
 git clone https://github.com/mozilla/fxa-geodb.git &
 git clone https://github.com/mozilla/browserid-local-verify.git &
+git clone https://github.com/mozilla/browserid-verifier.git &
 
 wait
 
